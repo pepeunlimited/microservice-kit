@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/pepeunlimited/microservice-kit/headers"
-	"github.com/siimooo/pepeutil/nginxjwt"
 	"strconv"
 )
 
@@ -18,7 +17,7 @@ func AddUserId(userId int64) context.Context {
 }
 
 func GetUserId(ctx context.Context) (int64, error) {
-	userId, valid := decode(nginxjwt.XJwtUserId, ctx)
+	userId, valid := decode(headers.XJwtUserId, ctx)
 	if !valid {
 		return 0, ErrMissingXJwtUserId
 	}
