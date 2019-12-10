@@ -3,7 +3,6 @@ package headers
 import (
 	"context"
 	"github.com/pepeunlimited/microservice-kit/middleware"
-	"github.com/pepeunlimited/microservice-kit/validator"
 	"net/http"
 )
 
@@ -20,16 +19,4 @@ func create(h http.Handler, header string) http.Handler {
 		r = r.WithContext(ctx)
 		h.ServeHTTP(w, r)
 	})
-}
-
-func decode(header string, ctx context.Context) (string, bool)  {
-	value := ctx.Value(header)
-	if value == nil {
-		return "", false
-	}
-	str := value.(string)
-	if validator.IsEmpty(str) {
-		return "", false
-	}
-	return str, true
 }
