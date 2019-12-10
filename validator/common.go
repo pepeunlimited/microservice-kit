@@ -1,3 +1,5 @@
 package validator
 
-// TODO: implement optional
+func IsEmpty(str string) bool {
+	return len(str) == 0
+}
