@@ -12,7 +12,7 @@ var (
 	ErrNotValidYet = errors.New("jwt: token is not valid yet")
 	ErrMalformed = errors.New("jwt: token malformed")
 	ErrNotCustomClaims = errors.New("jwt: token is not custom claims")
-	ErrUnknownError = errors.New("jwt: not validation error")
+	ErrUnknownError = errors.New("jwt: unknown error")
 )
 
 type JWT interface {
