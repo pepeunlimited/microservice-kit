@@ -7,37 +7,42 @@ import (
 	"net/http"
 )
 
-func WriteOK() {
-
+func WriteOk(resp http.ResponseWriter, data interface{}) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		internal(err, resp)
+	}
+	resp.WriteHeader(http.StatusOK)
+	resp.Write(bytes)
 }
 
 func WriteError(resp http.ResponseWriter, err error) {
 	error, ok := err.(Error)
 	if !ok {
-		internal(errors.New("is not Error-interface!"), resp)
+		internal(errors.New("given error is not right interface!"), resp)
 	} else {
 		resp.WriteHeader(error.Code())
 		resp.Header().Add("Content-Type", "application/json")
-		em, err := json.Marshal(error)
+		bytes, err := json.Marshal(error)
 		if err != nil {
 			internal(errors.New("can't marshall err: !"+err.Error()), resp)
 		} else {
-			resp.Write(em)
+			resp.Write(bytes)
 		}
 	}
 }
 
 func internal(err error, response http.ResponseWriter) {
-	response.WriteHeader(500)
+	response.WriteHeader(http.StatusInternalServerError)
 	response.Header().Add("Content-Type", "application/json")
-	em, err := json.Marshal(microError{
+	bytes, err := json.Marshal(microError{
 		Msg:        err.Error(),
-		StatusCode: 500,
+		StatusCode: http.StatusInternalServerError,
 	})
 	if err != nil {
 		log.Panic(err)
 	}
-	response.Write(em)
+	response.Write(bytes)
 }
 
 type Error interface {
