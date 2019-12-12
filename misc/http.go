@@ -46,19 +46,33 @@ type Error interface {
 	Error()		string
 }
 
-type MicroError struct {
+type microError struct {
 	Msg 		string  `json:"message"`
 	StatusCode 	int 	`json:"status_code"`
 }
 
-func (m MicroError) Message() string {
+func (m microError) Message() string {
 	return m.Msg
 }
 
-func (m MicroError) Code() int {
+func (m microError) Code() int {
 	return m.StatusCode
 }
 
-func (m MicroError) Error() string {
+func (m microError) Error() string {
 	return "microservice-kit-error: "+m.Msg
+}
+
+func NewError(err error, statusCode int) error {
+	return microError{
+		Msg:        err.Error(),
+		StatusCode: statusCode,
+	}
+}
+
+func NewMsgError(error string, statusCode int) error {
+	return microError{
+		Msg:        error,
+		StatusCode: statusCode,
+	}
 }
