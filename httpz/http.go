@@ -1,4 +1,4 @@
-package misc
+package httpz
 
 import (
 	"encoding/json"
