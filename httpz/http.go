@@ -12,6 +12,7 @@ func WriteOk(resp http.ResponseWriter, data interface{}) {
 	if err != nil {
 		internal(err, resp)
 	}
+	resp.Header().Add("Content-Type", "application/json")
 	resp.WriteHeader(http.StatusOK)
 	resp.Write(bytes)
 }
@@ -32,9 +33,9 @@ func WriteError(resp http.ResponseWriter, err error) {
 	}
 }
 
-func internal(err error, response http.ResponseWriter) {
-	response.WriteHeader(http.StatusInternalServerError)
-	response.Header().Add("Content-Type", "application/json")
+func internal(err error, resp http.ResponseWriter) {
+	resp.WriteHeader(http.StatusInternalServerError)
+	resp.Header().Add("Content-Type", "application/json")
 	bytes, err := json.Marshal(microError{
 		Msg:        err.Error(),
 		StatusCode: http.StatusInternalServerError,
@@ -42,7 +43,7 @@ func internal(err error, response http.ResponseWriter) {
 	if err != nil {
 		log.Panic(err)
 	}
-	response.Write(bytes)
+	resp.Write(bytes)
 }
 
 type Error interface {
