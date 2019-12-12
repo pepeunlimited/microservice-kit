@@ -30,7 +30,7 @@ func WriteError(resp http.ResponseWriter, err error) {
 func internal(err error, response http.ResponseWriter) {
 	response.WriteHeader(500)
 	response.Header().Add("Content-Type", "application/json")
-	em, err := json.Marshal(MicroError{
+	em, err := json.Marshal(microError{
 		Msg:        err.Error(),
 		StatusCode: 500,
 	})
