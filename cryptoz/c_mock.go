@@ -37,7 +37,7 @@ func (CryptoMock) Check(hashed string, password string) error {
 }
 
 
-func NewAuthenticatorMock() Authenticator {
+func NewAuthenticatorMock() Crypto {
 	return &CryptoMock{ForgotPasswordAttempts: 5, ForgotPasswordCount:0, ForgotToken: "forgot-token", ForgotTokenSame:"forgot-token-same"}
 }
 
