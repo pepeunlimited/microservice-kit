@@ -1,9 +1,8 @@
-package server
+package cryptoz
 
 import (
 	"crypto/rand"
 	"encoding/base64"
-	"errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -12,12 +11,7 @@ const (
 	MediumBytes int = 32
 )
 
-var (
-	ErrCryptoExp = errors.New("crypto: password reset has been expired")
-	ErrCryptoTicket = errors.New("crypto: ticket database returned error")
-)
-
-type Authenticator interface {
+type Crypto interface {
 	//hash the password/token using bcrypt (default cost)
 	Hash(password string) (string, error)
 
@@ -27,13 +21,13 @@ type Authenticator interface {
 	Random() (string, error)
 }
 
-type Crypto struct {}
+type crypto struct {}
 
-func (c Crypto) Random() (string, error) {
+func (c crypto) Random() (string, error) {
 	return c.token(MediumBytes)
 }
 
-func (Crypto) token(length int) (string, error) {
+func (crypto) token(length int) (string, error) {
 	bytes := make([]byte, length)
 	_, err := rand.Read(bytes)
 	if err != nil {
@@ -42,7 +36,7 @@ func (Crypto) token(length int) (string, error) {
 	return base64.URLEncoding.EncodeToString(bytes), err
 }
 
-func (Crypto) Hash(password string) (string, error) {
+func (crypto) Hash(password string) (string, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return "", err
@@ -50,10 +44,10 @@ func (Crypto) Hash(password string) (string, error) {
 	return string(hash), nil
 }
 
-func (Crypto) Check(hashed string, password string) error {
+func (crypto) Check(hashed string, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashed), []byte(password))
 }
 
-func NewAuthenticator() Authenticator {
-	return Crypto{}
+func NewCrypto() Crypto {
+	return crypto{}
 }

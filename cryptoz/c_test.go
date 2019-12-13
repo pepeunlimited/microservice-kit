@@ -1,4 +1,4 @@
-package server
+package cryptoz
 
 import (
 	"golang.org/x/crypto/bcrypt"
