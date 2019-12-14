@@ -1,4 +1,4 @@
-package grpc
+package rpcz
 
 const (
 	// usefully when you don't wanna duplicates for example username and etc..

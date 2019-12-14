@@ -1,4 +1,4 @@
-package grpc
+package rpcz
 
 
 func Int64() {}
