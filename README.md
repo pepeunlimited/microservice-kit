@@ -1,6 +1,6 @@
 # microservice-kit
 
-## gRPC (twitch/twirp)
+## rpc (twitch/twirp)
 
 ## GraphQL (99designs/gqlgen)
 
