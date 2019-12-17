@@ -22,8 +22,8 @@ func WriteError(resp http.ResponseWriter, err error) {
 	if !ok {
 		internal(errors.New("given error is not right interface!"), resp)
 	} else {
-		resp.WriteHeader(error.Code())
 		resp.Header().Add("Content-Type", "application/json")
+		resp.WriteHeader(error.Code())
 		bytes, err := json.Marshal(error)
 		if err != nil {
 			internal(errors.New("can't marshall err: !"+err.Error()), resp)
@@ -34,8 +34,8 @@ func WriteError(resp http.ResponseWriter, err error) {
 }
 
 func internal(err error, resp http.ResponseWriter) {
-	resp.WriteHeader(http.StatusInternalServerError)
 	resp.Header().Add("Content-Type", "application/json")
+	resp.WriteHeader(http.StatusInternalServerError)
 	bytes, err := json.Marshal(microError{
 		Msg:        err.Error(),
 		StatusCode: http.StatusInternalServerError,
