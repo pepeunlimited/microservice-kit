@@ -20,7 +20,7 @@ const SECRET_KEY = "JWT_SECRET_KEY"
 type JWT interface {
 	Verify(token string) error
 	VerifyCustomClaims(token string) (*CustomClaims, error)
-	SignIn(exp time.Duration, username string, email *string, roles []string, userId *int64) (string, error)
+	SignIn(exp time.Duration, username string, email *string, roles []*string, userId *int64) (string, error)
 	Sign(method jwt.SigningMethod, claims jwt.Claims)   (string, error)
 }
 
@@ -86,7 +86,7 @@ func (kit microkitjwt) Sign(method jwt.SigningMethod, claims jwt.Claims) (string
 	return token.SignedString(kit.secret)
 }
 
-func (kit microkitjwt) SignIn(exp time.Duration, username string, email *string, roles []string, userId *int64) (string, error) {
+func (kit microkitjwt) SignIn(exp time.Duration, username string, email *string, roles []*string, userId *int64) (string, error) {
 	claims := CustomClaims{
 		Username:       username,
 		Email:          email,
@@ -106,7 +106,7 @@ func NewJWT(secret []byte) JWT {
 type CustomClaims struct {
 	Username string 	`json:"username"`
 	Email 	 *string 	`json:"email"`
-	Roles 	 []string  	`json:"roles"`
+	Roles 	 []*string  	`json:"roles"`
 	UserId   *int64     `json:"user_id"`
 	jwt.StandardClaims
 }

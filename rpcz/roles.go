@@ -12,6 +12,18 @@ var (
 	ErrMissingRoles 			= errors.New("headers: missing X-JWT-Roles")
 )
 
+func RolesToString(roles []*string) string {
+	var str string
+	for i, role := range roles {
+		if len(roles) - 1 > i {
+			str += *role+","
+		} else {
+			str += *role
+		}
+	}
+	return str
+}
+
 func AddRoles(roles []string) context.Context {
 	if roles == nil || len(roles) == 0 {
 		return nil
@@ -23,10 +35,10 @@ func AddRoles(roles []string) context.Context {
 		} else {
 			str += role
 		}
-
 	}
 	return add(str, headers.XJwtRoles)
 }
+
 
 func AddRole(role string) context.Context {
 	return AddRoles([]string{role})
