@@ -8,12 +8,12 @@ const (
 	XForwardedFor			= "X-Forwarded-For"
 	XJwtUsername 			= "X-JWT-Username"
 	XJwtUserId 	 			= "X-JWT-UserId"
-	XJwtRole 				= "X-JWT-Role"
+	XJwtRoles 				= "X-JWT-Roles"
 	XJwtEmail    			= "X-JWT-Email"
 )
 
-func Role() middleware.Middleware {
-	return middlewarez(XJwtRole)
+func Roles() middleware.Middleware {
+	return middlewarez(XJwtRoles)
 }
 
 func Email() middleware.Middleware {
