@@ -24,3 +24,7 @@ func NewErrorStack(errors []error) Stack {
 	}
 	return Stack{stack:errors}
 }
+
+func (stack Stack) IsEmpty() bool {
+	return stack.stack == nil || len(stack.stack) == 0
+}
