@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/pepeunlimited/microservice-kit/headers"
+	"github.com/pepeunlimited/microservice-kit/jwt"
 )
 
 var (
@@ -20,4 +21,12 @@ func GetAuthorization(ctx context.Context) (string, error) {
 		return "", ErrMissingAuthorization
 	}
 	return auth, nil
+}
+
+func GetAuthorizationWithoutPrefix(ctx context.Context) (string, error) {
+	authorization, err := GetAuthorization(ctx)
+	if err != nil {
+		return "", err
+	}
+	return jwt.GetBearer(authorization)
 }
