@@ -11,6 +11,7 @@ const (
 	GMail Provider = "GMail"
 	Hotmail        = "Hotmail"
 	Mock           = "Mock"
+	MockFail       = "MockFail"
 )
 
 type builder struct {
@@ -68,7 +69,9 @@ func (builder builder) Build(provider Provider) Client {
 	case Hotmail:
 		client = NewSmtpClient(mail, HotmailPort, HotmailServer, LoginAuth(builder.username, builder.password))
 	case Mock:
-		client = &mock{mail: mail, Fail: false}
+		client = &mock{mail: mail, Fail: false, retryMax:5, count:0}
+	case MockFail:
+		client = &mock{mail: mail, Fail: true, retryMax:5, count:0}
 	default:
 		log.Panic("not supported smtp client")
 	}

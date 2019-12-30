@@ -6,8 +6,10 @@ import (
 )
 
 type mock struct {
-	mail Mail
-	Fail bool
+	mail 		Mail
+	Fail 		bool
+	count 		int
+	retryMax   	int
 }
 
 func (mock *mock) Mail() Mail {
@@ -16,6 +18,9 @@ func (mock *mock) Mail() Mail {
 
 func (mock *mock) Send() error {
 	log.Print("sending email..")
+	if mock.count > mock.retryMax {
+		mock.Fail = false
+	}
 	if mock.Fail {
 		return fmt.Errorf("failure during sending mail")
 	}
