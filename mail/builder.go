@@ -68,7 +68,7 @@ func (builder builder) Build(provider Provider) Client {
 	case Hotmail:
 		client = NewSmtpClient(mail, HotmailPort, HotmailServer, LoginAuth(builder.username, builder.password))
 	case Mock:
-		client = mock{mail: mail}
+		client = &mock{mail: mail, Fail: false}
 	default:
 		log.Panic("not supported smtp client")
 	}
