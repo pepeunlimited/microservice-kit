@@ -5,18 +5,11 @@ import (
 	"errors"
 	"github.com/pepeunlimited/microservice-kit/headers"
 	"github.com/pepeunlimited/microservice-kit/jwt"
-	"net/http"
 )
 
 var (
 	ErrMissingAuthorization 	= errors.New("headers: missing Authorization")
 )
-
-func AuthorizationHeader(token string) http.Header {
-	header := make(http.Header)
-	header.Set("Authorization", token)
-	return header
-}
 
 func AddAuthorization(token string) context.Context {
 	return add("Bearer "+token, headers.Authorization)
