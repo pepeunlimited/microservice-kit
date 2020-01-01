@@ -15,7 +15,8 @@ var (
 	ErrUnknownError = errors.New("jwt: unknown error")
 )
 
-const SECRET_KEY = "JWT_SECRET_KEY"
+const AccessTokenSecretKey 	= "ACCESS_TOKEN_SECRET_KEY"
+const RefreshTokenSecretKey = "REFRESH_TOKEN_SECRET_KEY"
 
 type JWT interface {
 	Verify(token string) error
