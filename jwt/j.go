@@ -8,11 +8,11 @@ import (
 )
 
 var (
-	ErrExpired = errors.New("jwt: token expired")
-	ErrNotValidYet = errors.New("jwt: token is not valid yet")
-	ErrMalformed = errors.New("jwt: token malformed")
-	ErrNotCustomClaims = errors.New("jwt: token is not custom claims")
-	ErrUnknownError = errors.New("jwt: unknown error")
+	ErrExpired 				= errors.New("jwt: token expired")
+	ErrNotValidYet 			= errors.New("jwt: token is not valid yet")
+	ErrMalformed 			= errors.New("jwt: token malformed")
+	ErrNotCustomClaims 		= errors.New("jwt: token is not custom claims")
+	ErrUnknownError 		= errors.New("jwt: unknown error")
 )
 
 const AccessTokenSecretKey 	= "ACCESS_TOKEN_SECRET_KEY"
