@@ -2,6 +2,7 @@ package cryptoz
 
 import (
 	"golang.org/x/crypto/bcrypt"
+	"log"
 	"testing"
 )
 
@@ -40,6 +41,7 @@ func TestCrypto_HashPwNotSame(t *testing.T) {
 func TestCrypto_Random(t *testing.T) {
 	authenticator := NewCrypto()
 	token, err := authenticator.Random()
+	log.Print(token)
 	if err != nil {
 		t.Fatal(err)
 	}
