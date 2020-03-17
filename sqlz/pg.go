@@ -15,9 +15,9 @@ const (
 func PostgreSQLURI(user string, pw string, host string, port int, database string, sslmode bool) string {
 	var sslmodetext string
 	if sslmode {
-		sslmodetext = "enabled"
+		sslmodetext = "require"
 	} else {
-		sslmodetext = "disabled"
+		sslmodetext = "disable"
 	}
 	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s", host, port, user, database, pw, sslmodetext)
 }
