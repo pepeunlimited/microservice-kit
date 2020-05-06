@@ -5,7 +5,7 @@ import "testing"
 func TestMock_Send(t *testing.T) {
 	mock := NewEmailMock(1)
 	err := mock.Send(Mail{
-		From:    From{email: "info@pepeunlimited.com", name: "Piia Niemi"},
+		From:    From{Email: "info@pepeunlimited.com", Name: "Piia Niemi"},
 		To:      []string{"simo.alakotila@gmail.com"},
 		Subject: "TestiSimo",
 		Body:    "HelloWorld",
@@ -14,7 +14,7 @@ func TestMock_Send(t *testing.T) {
 		t.FailNow()
 	}
 	err = mock.Send(Mail{
-		From:    From{email: "info@pepeunlimited.com", name: "Piia Niemi"},
+		From:    From{Email: "info@pepeunlimited.com", Name: "Piia Niemi"},
 		To:      []string{"simo.alakotila@gmail.com"},
 		Subject: "TestiSimo",
 		Body:    "HelloWorld",

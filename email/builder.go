@@ -8,8 +8,8 @@ type Mail struct {
 }
 
 type From struct {
-	email string
-	name string
+	Email string
+	Name  string
 }
 
 type builder struct {
@@ -38,8 +38,8 @@ type SubjectStep interface {
 }
 
 func (builder builder) From(email string, name string) ToStep {
-	builder.from.email = email
-	builder.from.name = name
+	builder.from.Email = email
+	builder.from.Name = name
 	return builder
 }
 

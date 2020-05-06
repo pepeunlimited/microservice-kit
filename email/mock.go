@@ -10,10 +10,10 @@ type mock struct {
 }
 
 func (m *mock) Send(mail Mail) error {
-	log.Print("sending email..")
+	log.Print("sending Email..")
 	if m.failureCount > 0 {
 		m.failureCount--
-		return errors.New("email-client: error during sending")
+		return errors.New("Email-client: error during sending")
 	}
 	log.Printf("from: %v", mail.From)
 	log.Printf("to: %v", mail.To)
