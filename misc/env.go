@@ -8,10 +8,10 @@ import (
 
 func GetEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
-		log.Printf("using env=[%v]", value)
+		log.Printf("set key=[%v] environment variable=[%v]", key, value)
 		return value
 	}
-	log.Printf("using fallback env=[%v]", fallback)
+	log.Printf("WARNING: invoked fallback for key=[%v] environment variable=[%v]",key, fallback)
 	return fallback
 }
 
