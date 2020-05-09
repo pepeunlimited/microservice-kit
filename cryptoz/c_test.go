@@ -49,3 +49,12 @@ func TestCrypto_Random(t *testing.T) {
 		t.Fatal("should be 44")
 	}
 }
+
+func TestCrypto_RandomAt(t *testing.T) {
+	at, err := NewCrypto().RandomAt(2, false)
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
+	}
+	log.Print(at)
+}

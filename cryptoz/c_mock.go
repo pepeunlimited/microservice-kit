@@ -36,6 +36,9 @@ func (CryptoMock) Check(hashed string, password string) error {
 	panic("implement me")
 }
 
+func (mock CryptoMock) RandomAt(length int, encode bool) (string, error) {
+	panic("implement me")
+}
 
 func NewAuthenticatorMock() Crypto {
 	return &CryptoMock{ForgotPasswordAttempts: 5, ForgotPasswordCount:0, ForgotToken: "forgot-token", ForgotTokenSame:"forgot-token-same"}
