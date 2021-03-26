@@ -12,7 +12,7 @@ const (
 )
 
 //host=%s port=%d user=%s password=%s dbname=%s sslmode=%s
-func PostgreSQLURI(user string, pw string, host string, port int, database string, sslmode bool, binaryparameters bool) string {
+func PostgreSQLURI(user string, pw string, host string, port int, database string, sslmode bool) string {
 	var sslmodetext string
 	if sslmode {
 		sslmodetext = "require"
@@ -20,12 +20,5 @@ func PostgreSQLURI(user string, pw string, host string, port int, database strin
 		sslmodetext = "disable"
 	}
 
-	var binaryparameterstext string
-	if binaryparameters {
-		binaryparameterstext = "yes"
-	} else {
-		binaryparameterstext = "no"
-	}
-
-	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s binary_parameters=%s", host, port, user, database, pw, sslmodetext, binaryparameterstext)
+	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s statement_cache_mode=describe", host, port, user, database, pw, sslmodetext)
 }
