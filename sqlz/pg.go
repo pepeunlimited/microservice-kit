@@ -20,5 +20,5 @@ func PostgreSQLURI(user string, pw string, host string, port int, database strin
 		sslmodetext = "disable"
 	}
 
-	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s statement_cache_mode=describe", host, port, user, database, pw, sslmodetext)
+	return fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s", host, port, user, database, pw, sslmodetext)
 }
